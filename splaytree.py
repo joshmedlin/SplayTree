@@ -44,14 +44,15 @@ class TreeNode:
 		if(self.value > self.parent.value):
 			#self.insertPostRotate(TreeNode(self.parent.leftChild, None, self, self.parent.value))
 			self.parent.rightChild = None
-			self.leftChild = self.parent
+			self.leftChild = TreeNode(self.parent.leftChild, None, self, self.parent.value)
 		else:
 			self.parent.leftchild = None
-			self.rightChild = self.parent
+			self.rightChild = TreeNode(None, self.parent.rightChild, self, self.parent.value)
+
 			#self.insertPostRotate(TreeNode(None, self.parent.rightChild, self, self.parent.value))
-		tempNode = self.parent
+
 		self.parent = self.parent.parent
-		tempNode.parent = self
+
 		if(not self.isTopLevel()):
 			print("rotate again!")
 			self.rotate()
